@@ -1,0 +1,29 @@
+{
+  "name": "startup-launch-kit-23",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261023.1",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.152.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "DB": {
+        "description": "D1 database that stores waitlist emails. Keep the suggested name or create a new database."
+      },
+      "AI": {
+        "description": "Workers AI, used by the AI assistant. Nothing to configure."
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // IMPORTANT: "name" must match the name of YOUR Worker.
+  // If you renamed it when you clicked "Deploy to Cloudflare", put that name here.
+  "name": "startup-launch-kit-23",
+  "compatibility_date": "2026-10-01",
+
+  // LEVEL 3: website + backend + database + AI.
+  // The Worker in worker/index.ts handles /api/* requests.
+  "main": "worker/index.ts",
+
+  // Everything else is the static website that Astro builds into ./dist.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
+    "not_found_handling": "404-page"
+  },
+
+  // A D1 (SQL) database for waitlist emails.
+  // No ID needed: Cloudflare creates the database automatically on deploy.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "startup-launch-kit-db","database_id": "a394232d-fd1c-46a2-b370-58640656532c"
+    }
+  ],
+
+  // Workers AI: run AI models without managing any servers or GPUs.
+  "ai": {
+    "binding": "AI"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
